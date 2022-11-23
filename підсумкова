@@ -1,0 +1,61 @@
+speed = np.array([25,35,45,30,60,120,100,100,70,75,80,65])
+time = np.linspace(0,11,12)
+//////////////////////
+speed = np.array([25,35,45,30,60,120,100,100,70,75,80,65])
+time = np.linspace(0,11,12)
+print(time)
+///////////////////////////
+import numpy as np
+from matplotlib import pyplot as plt
+import scipy as sp
+speed = np.array([25,35,45,30,60,120,100,100,70,75,80,65])
+time = np.linspace(0,11,12)
+for point in time:
+print(point)
+interpolated_f = sp.interpolate.interp1d(time,speed)
+plt.scatter(time, speed)
+plt.grid()
+plt.xlim(0,11)
+plt.ylim(0,130)
+plt.show()
+////////////////////////////
+import numpy as np
+from matplotlib import pyplot as plt
+import scipy as sp
+speed = np.array([25,35,45,30,60,120,100,100,70,75,80,65])
+time = np.linspace(0,11,12)
+for point in time:
+print(point)
+interpolated_f = sp.interpolate.interp1d(time,speed)
+time = np.linspace(0,11,10000)
+speed = interpolated_f(np.linspace(0,11,10000))
+plt.scatter(time, speed)
+plt.grid()
+plt.xlim(0,11)
+plt.ylim(0,130)
+plt.show()
+//////////////////////////////////
+import numpy as np
+from matplotlib import pyplot as plt
+import scipy as sp
+from scipy.integrate import quad
+speed = np.array([25,35,45,30,60,120,100,100,70,75,80,65])
+time = np.linspace(0,11,12)
+for point in time:
+print(point)
+interpolated_f = sp.interpolate.interp1d(time,speed)
+time = np.linspace(0,11,10000)
+speed = interpolated_f(np.linspace(0,11,10000))
+result = quad(interpolated_f, 0, 11)
+print("Result: " + str(result[0]))
+plt.scatter(time, speed)
+plt.grid()
+plt.xlim(0,11)
+plt.ylim(0,130)
+plt.show()
+//////////////////////////////
+interpolated_f = sp.interpolate.interp1d(time, speed, kind="quadratic")
+time = np.linspace(0, 11, 10000)
+speed = interpolated_f(np.linspace(0, 11, 10000))
+result = quad(interpolated_f, 0, 11)
+print("Result: " + str(result[0]))
