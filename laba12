@@ -30,3 +30,46 @@ sum+=f1(a+i*h)
 return sum*h
 print("середній прямокутник: ",round (aver_rec(f1,1.2,2,10), 5))
 print("Перевірка методу прямокутника = ",round (v, 5)
+///////////////////////////////////
+from scipy import integrate
+import math
+eps = 0.001
+a = 1.2
+b = 0.8
+n = 20
+def f1(x):
+return (math.cos(x)/x**2 + 1)
+def trap(f1, a, b, n):
+h=(b-a)/n
+sum=0.5*(f1(a)+f1(b))
+for i in range(1,n):
+sum+=f1(a+i*h)
+return sum*h
+v,err = integrate.quad(f1, a, b) #Перевірка
+if abs (trap(f1,a, b, 2*n) -trap(f1, a, b, n))/3. <= eps:
+print("Метод трапеції: ",round (trap(f1, a, b, n), 5))
+print("Перевірка методу трапеції = ",round(v, 5))
+/////////////////////////////
+from scipy import integrate
+import math
+eps = 0.001
+a = 1.2
+b = 0.2
+n = 8
+def f1(x):
+return 1 / math.sqrt(pow(x, 2) + 1)
+def simpson(a,b,n):
+h = (b - a) / n
+integr = f1(a) + f1(b)
+for i in range(1,n):
+k = a + i*h
+if i%2 == 0:
+integr += 2 * f1(k)
+else:
+integr += 4 * f1(k)
+integr *= h/3
+return integr
+if abs(simpson(b, a, 2*n) -simpson(b, a, n))/ 15. <= eps:
+print("Метод Сімпсона: ",round (simpson(b, a, n), 5))
+v,err = integrate.quad(f1,b, a)#Перевірка
+print("Перевірка методу Сімпсона = ",round(v, 5))
